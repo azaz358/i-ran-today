@@ -32,3 +32,21 @@ INSERT INTO auth.users (
   '',
   ''
 );
+
+INSERT INTO public.runs (
+    id,
+    user_id,
+    title,
+    ran_at,
+    map_url,
+    notes,
+    created_at
+) VALUES (
+    gen_random_uuid(),
+    (SELECT id FROM auth.users WHERE email = 'test@example.com'),
+    'test run',
+    now() - interval '1 day',
+    null,
+    'this is a test run.',
+    now()
+)

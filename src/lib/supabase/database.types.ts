@@ -38,22 +38,28 @@ export type Database = {
         Row: {
           created_at: string
           id: string
-          notes: string | null
+          map_url: string | null
+          notes: string
           ran_at: string
+          title: string
           user_id: string
         }
         Insert: {
           created_at?: string
           id?: string
-          notes?: string | null
+          map_url?: string | null
+          notes: string
           ran_at: string
+          title?: string
           user_id: string
         }
         Update: {
           created_at?: string
           id?: string
-          notes?: string | null
+          map_url?: string | null
+          notes?: string
           ran_at?: string
+          title?: string
           user_id?: string
         }
         Relationships: []
@@ -199,3 +205,4 @@ export const Constants = {
     Enums: {},
   },
 } as const
+

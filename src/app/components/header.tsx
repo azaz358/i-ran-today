@@ -1,6 +1,25 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 
 export default function Header() {
+  const [user, setUser] = useState<User | null>(null);
+  const supabase = createClient();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => setUser(session?.user ?? null)
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+
   return (
     <header
       style={{
@@ -36,8 +55,14 @@ export default function Header() {
             fontSize: "1.1rem",
           }}
         >
-          <Link href="/sign-in">sign in</Link>
-          <Link href="/create-account">create account</Link>
+          {user ? (
+            <a onClick={() => supabase.auth.signOut()}>logout</a>
+          ) : (
+            <>
+              <Link href="/sign-in">sign in</Link>
+              <Link href="/create-account">create account</Link>
+            </>
+          )}
           <Link href="/submit">submit</Link>
         </nav>
       </div>

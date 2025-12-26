@@ -57,6 +57,7 @@ a {
   border-bottom: 1px solid transparent;
   transition: border-color 0.15s ease;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 a:hover {
@@ -132,11 +133,8 @@ label {
 
 /* Error message */
 .error-message {
-  font-family: var(--font-mono);
-  color: var(--foreground);
-  border: 2px solid var(--foreground);
-  padding: 1rem;
-  margin: 1rem 0;
+  font-family: var(--font-serif);
+  color: red;
   background: var(--background);
 }
 

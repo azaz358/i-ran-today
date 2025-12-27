@@ -81,9 +81,9 @@ export default function SignInPage() {
       </form>
 
       <p style={{ marginTop: "2rem" }}>
-        don&apos;t have an account? <Link href="/create-account">create account</Link>
+        don&apos;t have an account?{" "}
+        <Link href="/create-account">create account</Link>
       </p>
     </div>
   );
 }
-

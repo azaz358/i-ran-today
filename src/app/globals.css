@@ -28,11 +28,16 @@ body {
 p {
   font-family: var(--font-serif);
   font-size: 18px;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-mono);
   font-weight: 400;
   letter-spacing: -0.02em;
@@ -67,13 +72,14 @@ a:hover {
 /* Hand-drawn style border class */
 .sketch-border {
   border: 2px solid var(--foreground);
-  box-shadow: 
+  box-shadow:
     2px 2px 0 var(--foreground),
     -1px -1px 0 var(--foreground);
 }
 
 /* Form inputs */
 input[type="text"],
+textarea,
 input[type="email"],
 input[type="password"] {
   font-family: var(--font-mono);
@@ -87,6 +93,7 @@ input[type="password"] {
 }
 
 input[type="text"]:focus,
+textarea:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
   box-shadow: 3px 3px 0 var(--foreground);

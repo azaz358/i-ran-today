@@ -11,14 +11,15 @@ export default function Header() {
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUser(data.user));
-    
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => setUser(session?.user ?? null)
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) =>
+      setUser(session?.user ?? null)
     );
 
     return () => subscription.unsubscribe();
   }, []);
-
 
   return (
     <header
@@ -36,16 +37,16 @@ export default function Header() {
         }}
       >
         <Link
-            href="/"
-            style={{
+          href="/"
+          style={{
             fontSize: "1.75rem",
             fontWeight: 400,
             letterSpacing: "-0.03em",
             textDecoration: "none",
             border: "none",
-            }}
+          }}
         >
-            i ran today
+          i ran today
         </Link>
 
         <nav
@@ -56,17 +57,18 @@ export default function Header() {
           }}
         >
           {user ? (
-            <a onClick={() => supabase.auth.signOut()}>logout</a>
+            <>
+              <Link href="/submit">submit</Link>
+              <a onClick={() => supabase.auth.signOut()}>logout</a>
+            </>
           ) : (
             <>
               <Link href="/sign-in">sign in</Link>
               <Link href="/create-account">create account</Link>
             </>
           )}
-          <Link href="/submit">submit</Link>
         </nav>
       </div>
     </header>
   );
 }
-

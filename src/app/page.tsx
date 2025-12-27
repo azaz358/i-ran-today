@@ -26,13 +26,11 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-8">
       {allRuns.map((run) => (
         <div key={run.id}>
           <h2>{run.title}</h2>
           <p>{run.notes}</p>
-
-          <br />
           <p>ran at: {format(new Date(run.ran_at), "MM/dd/yy h:mm a")}</p>
         </div>
       ))}

@@ -75,12 +75,12 @@ export default function SignInPage() {
 
         {error && <div className="error-message">{error}</div>}
 
-        <button type="submit" disabled={loading}>
+        <button className="mt-4" type="submit" disabled={loading}>
           {loading ? "signing in..." : "sign in"}
         </button>
       </form>
 
-      <p style={{ marginTop: "2rem" }}>
+      <p className="mt-4">
         don&apos;t have an account?{" "}
         <Link href="/create-account">create account</Link>
       </p>

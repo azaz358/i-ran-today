@@ -24,7 +24,7 @@ INSERT INTO auth.users (
   now(),
   now(),
   '{"provider":"email","providers":["email"]}',
-  '{}',
+  '{"username":"my cool username"}',
   'authenticated',
   'authenticated',
   '',

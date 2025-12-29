@@ -23,9 +23,9 @@ export default function Header() {
 
   return (
     <header
+      className="mb-2 py-4"
       style={{
         padding: "1.5rem 0",
-        marginBottom: "2rem",
       }}
     >
       <div

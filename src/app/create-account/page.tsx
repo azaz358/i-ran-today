@@ -7,6 +7,7 @@ import Link from "next/link";
 export default function CreateAccountPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,11 @@ export default function CreateAccountPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          username,
+        },
+      },
     });
 
     setLoading(false);
@@ -87,14 +93,26 @@ export default function CreateAccountPage() {
           />
         </div>
 
+        <div>
+          <label htmlFor="username">username</label>
+          <input
+            id="username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="super_cool_username"
+            required
+          />
+        </div>
+
         {error && <div className="error-message">{error}</div>}
 
-        <button type="submit" disabled={loading}>
+        <button className="mt-4" type="submit" disabled={loading}>
           {loading ? "creating..." : "create account"}
         </button>
       </form>
 
-      <p style={{ marginTop: "2rem" }}>
+      <p className="mt-4">
         already have an account? <Link href="/sign-in">sign in</Link>
       </p>
     </div>

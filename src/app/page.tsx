@@ -5,19 +5,31 @@ import { useEffect, useState } from "react";
 import { Tables } from "@/lib/supabase/database.types";
 import { format } from "date-fns";
 
+type RunWithProfile = Tables<"runs"> & {
+  username: string;
+};
+
+const supabase = createClient();
+
 export default function Home() {
-  const supabase = createClient();
-  const [allRuns, setAllRuns] = useState<Tables<"runs">[]>([]);
+  const [allRuns, setAllRuns] = useState<RunWithProfile[]>([]);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     supabase
       .from("runs")
-      .select("*")
+      .select("*, profiles(username)")
+      .order("ran_at", { ascending: false })
       .then(({ data, error }) => {
         if (error) {
-          return <div>error: {error.message}</div>;
+          setError(error.message);
+          return;
         }
-        setAllRuns(data);
+        const runs = data.map(({ profiles, ...run }) => ({
+          ...run,
+          username: profiles?.username ?? "Unknown",
+        }));
+        setAllRuns(runs);
       });
   }, []);
 
@@ -27,11 +39,13 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-8">
+      {error && <div className="error-message">error: {error}</div>}
       {allRuns.map((run) => (
         <div key={run.id}>
           <h2>{run.title}</h2>
           <p>{run.notes}</p>
           <p>ran at: {format(new Date(run.ran_at), "MM/dd/yy h:mm a")}</p>
+          <p>by: {run.username}</p>
         </div>
       ))}
     </div>
